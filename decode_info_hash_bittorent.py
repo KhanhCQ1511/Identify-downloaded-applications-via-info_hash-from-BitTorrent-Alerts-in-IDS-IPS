@@ -1,14 +1,18 @@
+# Flow: https://stackoverflow.com/questions/5637268/how-do-you-decode-info-hash-information-from-tracker-announce-request
+# Author: KhanhCQ
+# Date: 21/11/2024
+# Country: VietNam
 def decode_info_hash(info_hash):
     decoded = ""
     i = 0
     while i < len(info_hash):
-        if info_hash[i] == "%":  # Nếu gặp ký tự %, lấy 2 ký tự tiếp theo
+        if info_hash[i] == "%":  # If the % character is encountered, take the next 2 characters.
             hex_value = info_hash[i + 1:i + 3]
             decoded += hex_value
-            i += 3  # Nhảy qua 3 ký tự
-        else:  # Nếu không phải %, chuyển ký tự thường sang mã hex
+            i += 3  # Jump 3 characters
+        else:  # If not %, convert lowercase character to hex code
             decoded += format(ord(info_hash[i]), "02x")
-            i += 1  # Nhảy qua ký tự thường
+            i += 1  # Jump over lowercase characters
     return decoded
 
 def generate_magnet_link(info_hash, name):
